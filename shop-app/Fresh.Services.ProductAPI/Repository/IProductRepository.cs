@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Fresh.Services.ProductAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fresh.Services.ProductAPI.Repository
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
+        Task<IEnumerable<ProductDTO>> GetProducts();
+        Task<ProductDTO> GetProductById(int id);
+        Task<ProductDTO> CreateUpdateProduct(ProductDTO productDTO);
+        Task<bool> DeleteProduct(int id);
     }
 }
