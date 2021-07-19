@@ -3,9 +3,40 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{ACC23CA9-D704-4F19-B2FA-7B37725A573D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{CC8B884F-79B2-407F-958E-C997B0666474}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FE825C00-4C81-434E-953B-3DDF75B093D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fresh.Services.ProductAPI", "Fresh.Services.ProductAPI\Fresh.Services.ProductAPI.csproj", "{59744394-55E9-4E46-9AF7-9037BBDB60A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{99B23B40-E6F2-4647-9A38-61E0F25247C6}"
+	ProjectSection(SolutionItems) = preProject
+		F:\Projects\Projects\Microservices\Codexia Shopping Cart\Codexia.Services.ProductAPI\Readme.txt = F:\Projects\Projects\Microservices\Codexia Shopping Cart\Codexia.Services.ProductAPI\Readme.txt
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC8B884F-79B2-407F-958E-C997B0666474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8B884F-79B2-407F-958E-C997B0666474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8B884F-79B2-407F-958E-C997B0666474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8B884F-79B2-407F-958E-C997B0666474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59744394-55E9-4E46-9AF7-9037BBDB60A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59744394-55E9-4E46-9AF7-9037BBDB60A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59744394-55E9-4E46-9AF7-9037BBDB60A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59744394-55E9-4E46-9AF7-9037BBDB60A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC8B884F-79B2-407F-958E-C997B0666474} = {ACC23CA9-D704-4F19-B2FA-7B37725A573D}
+		{59744394-55E9-4E46-9AF7-9037BBDB60A3} = {FE825C00-4C81-434E-953B-3DDF75B093D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {618A8F36-CE31-4244-925D-A69DDD780FB0}
