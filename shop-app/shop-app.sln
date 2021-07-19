@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FE825C00-4C81-434E-953B-3DDF75B093D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fresh.Services.ProductAPI", "Fresh.Services.ProductAPI\Fresh.Services.ProductAPI.csproj", "{59744394-55E9-4E46-9AF7-9037BBDB60A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fresh.Services.ProductAPI", "Fresh.Services.ProductAPI\Fresh.Services.ProductAPI.csproj", "{59744394-55E9-4E46-9AF7-9037BBDB60A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{99B23B40-E6F2-4647-9A38-61E0F25247C6}"
+	ProjectSection(SolutionItems) = preProject
+		F:\Projects\Projects\Microservices\Codexia Shopping Cart\Codexia.Services.ProductAPI\Readme.txt = F:\Projects\Projects\Microservices\Codexia Shopping Cart\Codexia.Services.ProductAPI\Readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Fresh.Services.ProductAPI.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Fresh.Services.ProductAPI.DbContexts
         {
 
         }
+        public DbSet<Product> Products { get; set; }
     }
 }
