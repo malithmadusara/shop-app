@@ -1,4 +1,7 @@
+using AutoMapper;
+using Codexia.Services.ProductAPI;
 using Fresh.Services.ProductAPI.DbContexts;
+using Fresh.Services.ProductAPI.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +33,16 @@ namespace Fresh.Services.ProductAPI
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //Auto Mapper
+            IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            //Repositories
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            //Services
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
