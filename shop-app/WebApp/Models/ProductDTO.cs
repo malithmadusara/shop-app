@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fresh.Services.ProductAPI.Models
+namespace WebApp.Models
 {
     public class ProductDTO
     {
