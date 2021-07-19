@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Services;
+using WebApp.Services.IServices;
 
 namespace WebApp
 {
@@ -23,6 +25,14 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Start Configurations
+            services.AddHttpClient<IProductService, ProductService>();
+
+            SD.ProductAPIBase = Configuration["ServiceUrls:ProductAPI"];
+
+            services.AddScoped<IProductService, ProductService>();
+            //End Configurations
+
             services.AddControllersWithViews();
         }
 
