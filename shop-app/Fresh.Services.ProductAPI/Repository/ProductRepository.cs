@@ -21,9 +21,9 @@ namespace Fresh.Services.ProductAPI.Repository
             _mapper = mapper;
         }
 
-        public async Task<ProductDto> CreateUpdateProduct(ProductDto productDto)
+        public async Task<ProductDTO> CreateUpdateProduct(ProductDTO ProductDTO)
         {
-            Product product = _mapper.Map<ProductDto, Product>(productDto);
+            Product product = _mapper.Map<ProductDTO, Product>(ProductDTO);
             if (product.ProductId > 0)
             {
                 _db.Products.Update(product);
@@ -33,7 +33,7 @@ namespace Fresh.Services.ProductAPI.Repository
                 _db.Products.Add(product);
             }
             await _db.SaveChangesAsync();
-            return _mapper.Map<Product, ProductDto>(product);
+            return _mapper.Map<Product, ProductDTO>(product);
         }
 
         public async Task<bool> DeleteProduct(int productId)
@@ -54,16 +54,16 @@ namespace Fresh.Services.ProductAPI.Repository
             }
         }
 
-        public async Task<ProductDto> GetProductById(int productId)
+        public async Task<ProductDTO> GetProductById(int productId)
         {
             Product product = await _db.Products.Where(x=>x.ProductId==productId).FirstOrDefaultAsync();
-            return _mapper.Map<ProductDto>(product);
+            return _mapper.Map<ProductDTO>(product);
         }
 
-        public async Task<IEnumerable<ProductDto>> GetProducts()
+        public async Task<IEnumerable<ProductDTO>> GetProducts()
         {
             List<Product> productList = await _db.Products.ToListAsync();
-            return _mapper.Map<List<ProductDto>>(productList);
+            return _mapper.Map<List<ProductDTO>>(productList);
 
         }
     }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fresh.Web.Models
 {
-    public class ProductDto
+    public class ProductDTO
     {
-        public ProductDto()
+        public ProductDTO()
         {
             Count = 1;
         }

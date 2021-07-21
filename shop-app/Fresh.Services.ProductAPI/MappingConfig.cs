@@ -14,8 +14,8 @@ namespace Fresh.Services.ProductAPI
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<ProductDto, Product>();
-                config.CreateMap<Product, ProductDto>();
+                config.CreateMap<ProductDTO, Product>();
+                config.CreateMap<Product, ProductDTO>();
             });
 
             return mappingConfig;
