@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{99B23B40-E6F
 		F:\Projects\Projects\Microservices\Codexia Shopping Cart\Codexia.Services.ProductAPI\Readme.txt = F:\Projects\Projects\Microservices\Codexia Shopping Cart\Codexia.Services.ProductAPI\Readme.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fresh.Services.Identity", "Fresh.Services.Identity\Fresh.Services.Identity.csproj", "{421BD80C-C376-40FD-B2F6-832D4215ABD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{59744394-55E9-4E46-9AF7-9037BBDB60A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59744394-55E9-4E46-9AF7-9037BBDB60A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59744394-55E9-4E46-9AF7-9037BBDB60A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421BD80C-C376-40FD-B2F6-832D4215ABD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421BD80C-C376-40FD-B2F6-832D4215ABD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421BD80C-C376-40FD-B2F6-832D4215ABD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421BD80C-C376-40FD-B2F6-832D4215ABD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CC8B884F-79B2-407F-958E-C997B0666474} = {ACC23CA9-D704-4F19-B2FA-7B37725A573D}
 		{59744394-55E9-4E46-9AF7-9037BBDB60A3} = {FE825C00-4C81-434E-953B-3DDF75B093D0}
+		{421BD80C-C376-40FD-B2F6-832D4215ABD4} = {FE825C00-4C81-434E-953B-3DDF75B093D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {618A8F36-CE31-4244-925D-A69DDD780FB0}

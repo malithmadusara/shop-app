@@ -1,6 +1,6 @@
 using System;
 
-namespace WebApp.Models
+namespace Fresh.Web.Models
 {
     public class ErrorViewModel
     {

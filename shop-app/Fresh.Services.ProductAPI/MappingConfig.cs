@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Fresh.Services.ProductAPI.Models;
+using Fresh.Services.ProductAPI.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Codexia.Services.ProductAPI
+namespace Fresh.Services.ProductAPI
 {
     public class MappingConfig
     {
@@ -13,8 +14,8 @@ namespace Codexia.Services.ProductAPI
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<ProductDTO, Product>();
-                config.CreateMap<Product, ProductDTO>();
+                config.CreateMap<ProductDto, Product>();
+                config.CreateMap<Product, ProductDto>();
             });
 
             return mappingConfig;
