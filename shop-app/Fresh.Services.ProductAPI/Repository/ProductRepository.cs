@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Fresh.Services.ProductAPI.DbContexts;
 using Fresh.Services.ProductAPI.Models;
+using Fresh.Services.ProductAPI.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,45 +12,41 @@ namespace Fresh.Services.ProductAPI.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
         private IMapper _mapper;
 
-        public ProductRepository(ApplicationDbContext context, IMapper mapper)
+        public ProductRepository(ApplicationDbContext db, IMapper mapper)
         {
-            _context = context;
+            _db = db;
             _mapper = mapper;
         }
 
-        public async Task<ProductDTO> CreateUpdateProduct(ProductDTO productDTO)
+        public async Task<ProductDto> CreateUpdateProduct(ProductDto productDto)
         {
-            Product product = _mapper.Map<ProductDTO, Product>(productDTO);
+            Product product = _mapper.Map<ProductDto, Product>(productDto);
             if (product.ProductId > 0)
             {
-                _context.Products.Update(product);
+                _db.Products.Update(product);
             }
             else
             {
-                _context.Products.Add(product);
+                _db.Products.Add(product);
             }
-            await _context.SaveChangesAsync();
-            return _mapper.Map<Product, ProductDTO>(product);
+            await _db.SaveChangesAsync();
+            return _mapper.Map<Product, ProductDto>(product);
         }
 
-        public async Task<bool> DeleteProduct(int id)
+        public async Task<bool> DeleteProduct(int productId)
         {
-            try
-            {
-                Product product = await _context.Products.Where(p => p.ProductId == id).FirstOrDefaultAsync();
+            try{
+                Product product = await _db.Products.FirstOrDefaultAsync(u => u.ProductId == productId);
                 if (product == null)
                 {
                     return false;
                 }
-                else
-                {
-                    _context.Products.Remove(product);
-                    await _context.SaveChangesAsync();
-                    return true;
-                }
+                _db.Products.Remove(product);
+                await _db.SaveChangesAsync();
+                return true;
             }
             catch (Exception)
             {
@@ -57,16 +54,17 @@ namespace Fresh.Services.ProductAPI.Repository
             }
         }
 
-        public async Task<ProductDTO> GetProductById(int id)
+        public async Task<ProductDto> GetProductById(int productId)
         {
-            Product product = await _context.Products.Where(p => p.ProductId == id).FirstOrDefaultAsync();
-            return _mapper.Map<ProductDTO>(product);
+            Product product = await _db.Products.Where(x=>x.ProductId==productId).FirstOrDefaultAsync();
+            return _mapper.Map<ProductDto>(product);
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetProducts()
+        public async Task<IEnumerable<ProductDto>> GetProducts()
         {
-            List<Product> productList = await _context.Products.ToListAsync();
-            return _mapper.Map<List<ProductDTO>>(productList);
+            List<Product> productList = await _db.Products.ToListAsync();
+            return _mapper.Map<List<ProductDto>>(productList);
+
         }
     }
 }
