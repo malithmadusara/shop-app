@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Fresh.Web.Models
 {
-    public class CartDto
+    public class CartDTO
     {
-        public CartHeaderDto CartHeader { get; set; }
-        public IEnumerable<CartDetailsDto> CartDetails { get; set; }
+        public CartHeaderDTO CartHeader { get; set; }
+        public IEnumerable<CartDetailsDTO> CartDetails { get; set; }
     }
 }

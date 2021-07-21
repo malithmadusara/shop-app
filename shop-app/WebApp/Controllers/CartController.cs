@@ -23,16 +23,16 @@ namespace Fresh.Web.Controllers
         }
         public async Task<IActionResult> CartIndex()
         {
-            return View(await LoadCartDtoBasedOnLoggedInUser());
+            return View(await LoadCartDTOBasedOnLoggedInUser());
         }
 
         [HttpPost]
         [ActionName("ApplyCoupon")]
-        public async Task<IActionResult> ApplyCoupon(CartDto cartDto)
+        public async Task<IActionResult> ApplyCoupon(CartDTO CartDTO)
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _cartService.ApplyCoupon<ResponseDto>(cartDto, accessToken);
+            var response = await _cartService.ApplyCoupon<ResponseDTO>(CartDTO, accessToken);
 
             if (response != null && response.IsSuccess)
             {
@@ -43,11 +43,11 @@ namespace Fresh.Web.Controllers
 
         [HttpPost]
         [ActionName("RemoveCoupon")]
-        public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
+        public async Task<IActionResult> RemoveCoupon(CartDTO CartDTO)
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId, accessToken);
+            var response = await _cartService.RemoveCoupon<ResponseDTO>(CartDTO.CartHeader.UserId, accessToken);
 
             if (response != null && response.IsSuccess)
             {
@@ -60,7 +60,7 @@ namespace Fresh.Web.Controllers
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _cartService.RemoveFromCartAsync<ResponseDto>(cartDetailsId, accessToken);
+            var response = await _cartService.RemoveFromCartAsync<ResponseDTO>(cartDetailsId, accessToken);
 
             
             if (response != null && response.IsSuccess)
@@ -73,16 +73,16 @@ namespace Fresh.Web.Controllers
       
         public async Task<IActionResult> Checkout()
         {
-            return View(await LoadCartDtoBasedOnLoggedInUser());
+            return View(await LoadCartDTOBasedOnLoggedInUser());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Checkout(CartDto cartDto) 
+        public async Task<IActionResult> Checkout(CartDTO CartDTO) 
         {
             try
             {
                 var accessToken = await HttpContext.GetTokenAsync("access_token");
-                var response = await _cartService.Checkout<ResponseDto>(cartDto.CartHeader, accessToken);
+                var response = await _cartService.Checkout<ResponseDTO>(CartDTO.CartHeader, accessToken);
                 if (!response.IsSuccess)
                 {
                     TempData["Error"] = response.DisplayMessage;
@@ -92,7 +92,7 @@ namespace Fresh.Web.Controllers
             }
             catch(Exception e)
             {
-                return View(cartDto);
+                return View(CartDTO);
             }
         }
        
@@ -100,37 +100,37 @@ namespace Fresh.Web.Controllers
         {
             return View();
         }
-        private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
+        private async Task<CartDTO> LoadCartDTOBasedOnLoggedInUser()
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _cartService.GetCartByUserIdAsnyc<ResponseDto>(userId, accessToken);
+            var response = await _cartService.GetCartByUserIdAsnyc<ResponseDTO>(userId, accessToken);
 
-            CartDto cartDto = new();
+            CartDTO CartDTO = new();
             if(response!=null && response.IsSuccess)
             {
-                cartDto = JsonConvert.DeserializeObject<CartDto>(Convert.ToString(response.Result));
+                CartDTO = JsonConvert.DeserializeObject<CartDTO>(Convert.ToString(response.Result));
             }
 
-            if (cartDto.CartHeader != null)
+            if (CartDTO.CartHeader != null)
             {
-                if (!string.IsNullOrEmpty(cartDto.CartHeader.CouponCode))
+                if (!string.IsNullOrEmpty(CartDTO.CartHeader.CouponCode))
                 {
-                    var coupon = await _couponService.GetCoupon<ResponseDto>(cartDto.CartHeader.CouponCode, accessToken);
+                    var coupon = await _couponService.GetCoupon<ResponseDTO>(CartDTO.CartHeader.CouponCode, accessToken);
                     if (coupon != null && coupon.IsSuccess)
                     {
-                        var couponObj = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(coupon.Result));
-                        cartDto.CartHeader.DiscountTotal = couponObj.DiscountAmount;
+                        var couponObj = JsonConvert.DeserializeObject<CouponDTO>(Convert.ToString(coupon.Result));
+                        CartDTO.CartHeader.DiscountTotal = couponObj.DiscountAmount;
                     }
                 }
 
-                foreach (var detail in cartDto.CartDetails) {
-                    cartDto.CartHeader.OrderTotal += (detail.Product.Price * detail.Count);
+                foreach (var detail in CartDTO.CartDetails) {
+                    CartDTO.CartHeader.OrderTotal += (detail.Product.Price * detail.Count);
                 }
 
-                cartDto.CartHeader.OrderTotal -= cartDto.CartHeader.DiscountTotal;
+                CartDTO.CartHeader.OrderTotal -= CartDTO.CartHeader.DiscountTotal;
             }
-            return cartDto;
+            return CartDTO;
         }
     }
 }

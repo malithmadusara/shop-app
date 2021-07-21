@@ -16,29 +16,29 @@ namespace Fresh.Web.Services
         {
             _clientFactory = clientFactory;
         }
-        public async Task<T> AddToCartAsync<T>(CartDto cartDto, string token = null)
+        public async Task<T> AddToCartAsync<T>(CartDTO CartDTO, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
-                Data = cartDto,
+                Data = CartDTO,
                 Url = SD.ShoppingCartAPIBase + "/api/cart/AddCart",
                 AccessToken = token
             });
         }
 
-        public async Task<T> ApplyCoupon<T>(CartDto cartDto, string token = null)
+        public async Task<T> ApplyCoupon<T>(CartDTO CartDTO, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
-                Data = cartDto,
+                Data = CartDTO,
                 Url = SD.ShoppingCartAPIBase + "/api/cart/ApplyCoupon",
                 AccessToken = token
             });
         }
 
-        public async Task<T> Checkout<T>(CartHeaderDto cartHeader, string token = null)
+        public async Task<T> Checkout<T>(CartHeaderDTO cartHeader, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
@@ -81,12 +81,12 @@ namespace Fresh.Web.Services
             });
         }
 
-        public async Task<T> UpdateCartAsync<T>(CartDto cartDto, string token = null)
+        public async Task<T> UpdateCartAsync<T>(CartDTO CartDTO, string token = null)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
-                Data = cartDto,
+                Data = CartDTO,
                 Url = SD.ShoppingCartAPIBase + "/api/cart/UpdateCart",
                 AccessToken = token
             });

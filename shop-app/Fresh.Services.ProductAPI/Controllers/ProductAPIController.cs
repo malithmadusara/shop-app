@@ -13,21 +13,21 @@ namespace Fresh.Services.ProductAPI.Controllers
     [Route("api/products")]
     public class ProductAPIController : ControllerBase
     {
-        protected ResponseDto _response;
+        protected ResponseDTO _response;
         private IProductRepository _productRepository;
 
         public ProductAPIController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            this._response = new ResponseDto();
+            this._response = new ResponseDTO();
         }
         [HttpGet]
         public async Task<object> Get()
         {
             try
             {
-                IEnumerable<ProductDto> productDtos = await _productRepository.GetProducts();
-                _response.Result = productDtos;
+                IEnumerable<ProductDTO> ProductDTOs = await _productRepository.GetProducts();
+                _response.Result = ProductDTOs;
             }
             catch(Exception ex)
             {
@@ -44,8 +44,8 @@ namespace Fresh.Services.ProductAPI.Controllers
         {
             try
             {
-                ProductDto productDto = await _productRepository.GetProductById(id);
-                _response.Result = productDto;
+                ProductDTO ProductDTO = await _productRepository.GetProductById(id);
+                _response.Result = ProductDTO;
             }
             catch (Exception ex)
             {
@@ -59,11 +59,11 @@ namespace Fresh.Services.ProductAPI.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<object> Post([FromBody] ProductDto productDto)
+        public async Task<object> Post([FromBody] ProductDTO ProductDTO)
         {
             try
             {
-                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
+                ProductDTO model = await _productRepository.CreateUpdateProduct(ProductDTO);
                 _response.Result = model;
             }
             catch (Exception ex)
@@ -78,11 +78,11 @@ namespace Fresh.Services.ProductAPI.Controllers
 
         [HttpPut]
         [Authorize]
-        public async Task<object> Put([FromBody] ProductDto productDto)
+        public async Task<object> Put([FromBody] ProductDTO ProductDTO)
         {
             try
             {
-                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
+                ProductDTO model = await _productRepository.CreateUpdateProduct(ProductDTO);
                 _response.Result = model;
             }
             catch (Exception ex)

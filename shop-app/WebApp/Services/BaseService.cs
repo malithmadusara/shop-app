@@ -13,12 +13,12 @@ namespace Fresh.Web.Services
 {
     public class BaseService : IBaseService
     {
-        public ResponseDto responseModel { get; set; }
+        public ResponseDTO responseModel { get; set; }
         public IHttpClientFactory httpClient { get; set; }
 
         public BaseService(IHttpClientFactory httpClient)
         {
-            this.responseModel = new ResponseDto();
+            this.responseModel = new ResponseDTO();
             this.httpClient = httpClient;
         }
 
@@ -61,21 +61,21 @@ namespace Fresh.Web.Services
                 apiResponse = await client.SendAsync(message);
 
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                var apiResponseDto = JsonConvert.DeserializeObject<T>(apiContent);
-                return apiResponseDto;
+                var apiResponseDTO = JsonConvert.DeserializeObject<T>(apiContent);
+                return apiResponseDTO;
 
             }
             catch(Exception e)
             {
-                var dto = new ResponseDto
+                var dto = new ResponseDTO
                 {
                     DisplayMessage = "Error",
                     ErrorMessages = new List<string> { Convert.ToString(e.Message) },
                     IsSuccess = false
                 };
                 var res = JsonConvert.SerializeObject(dto);
-                var apiResponseDto = JsonConvert.DeserializeObject<T>(res);
-                return apiResponseDto;
+                var apiResponseDTO = JsonConvert.DeserializeObject<T>(res);
+                return apiResponseDTO;
             }
         }
 

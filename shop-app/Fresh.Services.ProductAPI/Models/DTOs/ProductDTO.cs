@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Fresh.Services.ProductAPI.Models.Dtos
 {
-    public class ProductDto
+    public class ProductDTO
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
