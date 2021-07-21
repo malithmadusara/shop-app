@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Fresh.Services.ProductAPI.Models.Dto
 {
-    public class ResponseDto
+    public class ResponseDTO
     {
         public bool IsSuccess { get; set; } = true;
         public object Result { get; set; }

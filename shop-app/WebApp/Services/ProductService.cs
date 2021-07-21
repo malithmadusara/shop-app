@@ -17,12 +17,12 @@ namespace Fresh.Web.Services
             _clientFactory = clientFactory;
         }
 
-        public async Task<T> CreateProductAsync<T>(ProductDto productDto, string token)
+        public async Task<T> CreateProductAsync<T>(ProductDTO ProductDTO, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
-                Data = productDto,
+                Data = ProductDTO,
                 Url = SD.ProductAPIBase + "/api/products",
                 AccessToken = token
             });
@@ -58,12 +58,12 @@ namespace Fresh.Web.Services
             });
         }
 
-        public async Task<T> UpdateProductAsync<T>(ProductDto productDto, string token)
+        public async Task<T> UpdateProductAsync<T>(ProductDTO ProductDTO, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.PUT,
-                Data = productDto,
+                Data = ProductDTO,
                 Url = SD.ProductAPIBase + "/api/products",
                 AccessToken = token
             });

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Fresh.Web.Models
 {
-    public class CouponDto
+    public class CouponDTO
     {
         public int CouponId { get; set; }
         public string CouponCode { get; set; }

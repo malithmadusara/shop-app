@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Fresh.Web.Models
 {
-    public class CartHeaderDto
+    public class CartHeaderDTO
     {
         public int CartHeaderId { get; set; }
         public string UserId { get; set; }
