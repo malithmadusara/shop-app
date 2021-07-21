@@ -1,5 +1,7 @@
-﻿using Fresh.Services.ProductAPI.Models;
+﻿using Fresh.Services.ProductAPI.Models.Dto;
+using Fresh.Services.ProductAPI.Models.Dtos;
 using Fresh.Services.ProductAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,30 +10,29 @@ using System.Threading.Tasks;
 
 namespace Fresh.Services.ProductAPI.Controllers
 {
-    [Route("api/v1/products")]
+    [Route("api/products")]
     public class ProductAPIController : ControllerBase
     {
-        protected ResponseDTO _response;
+        protected ResponseDto _response;
         private IProductRepository _productRepository;
 
         public ProductAPIController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            this._response = new ResponseDTO();
+            this._response = new ResponseDto();
         }
-
         [HttpGet]
         public async Task<object> Get()
         {
             try
             {
-                IEnumerable<ProductDTO> productDTOs = await _productRepository.GetProducts();
-                _response.Result = productDTOs;
+                IEnumerable<ProductDto> productDtos = await _productRepository.GetProducts();
+                _response.Result = productDtos;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage
+                _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
             return _response;
@@ -43,53 +44,58 @@ namespace Fresh.Services.ProductAPI.Controllers
         {
             try
             {
-                ProductDTO productDTOs = await _productRepository.GetProductById(id);
-                _response.Result = productDTOs;
+                ProductDto productDto = await _productRepository.GetProductById(id);
+                _response.Result = productDto;
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage
+                _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
             return _response;
         }
+
 
         [HttpPost]
-        public async Task<object> Post([FromBody] ProductDTO productDTO)
+        [Authorize]
+        public async Task<object> Post([FromBody] ProductDto productDto)
         {
             try
             {
-                ProductDTO model = await _productRepository.CreateUpdateProduct(productDTO);
+                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
                 _response.Result = model;
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage
+                _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
             return _response;
         }
 
+
         [HttpPut]
-        public async Task<object> Put([FromBody] ProductDTO productDTO)
+        [Authorize]
+        public async Task<object> Put([FromBody] ProductDto productDto)
         {
             try
             {
-                ProductDTO model = await _productRepository.CreateUpdateProduct(productDTO);
+                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
                 _response.Result = model;
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage
+                _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
             return _response;
         }
 
         [HttpDelete]
+        [Authorize(Roles ="Admin")]
         [Route("{id}")]
         public async Task<object> Delete(int id)
         {
@@ -101,7 +107,7 @@ namespace Fresh.Services.ProductAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage
+                _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
             return _response;

@@ -1,5 +1,5 @@
-﻿using WebApp.Models;
-using WebApp.Services.IServices;
+﻿using Fresh.Web.Models;
+using Fresh.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Controllers
+namespace Fresh.Web.Controllers
 {
     public class ProductController : Controller
     {
@@ -21,12 +21,12 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> ProductIndex()
         {
-            List<ProductDTO> list = new();
-            //var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _productService.GetAllProductsAsync<ResponseDTO>();
+            List<ProductDto> list = new();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetAllProductsAsync<ResponseDto>(accessToken);
             if (response != null && response.IsSuccess)
             {
-                list = JsonConvert.DeserializeObject<List<ProductDTO>>(Convert.ToString(response.Result));
+                list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
             }
             return View(list);
         }
@@ -37,12 +37,12 @@ namespace WebApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProductCreate(ProductDTO model)
+        public async Task<IActionResult> ProductCreate(ProductDto model)
         {
             if (ModelState.IsValid)
             {
-                //var accessToken = await HttpContext.GetTokenAsync("access_token");
-                var response = await _productService.CreateProductAsync<ResponseDTO>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.CreateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(ProductIndex));
@@ -52,23 +52,23 @@ namespace WebApp.Controllers
         }
         public async Task<IActionResult> ProductEdit(int productId)
         {
-            //var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _productService.GetProductByIdAsync<ResponseDTO>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
             if (response != null && response.IsSuccess)
             {
-                ProductDTO model = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(response.Result));
+                ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
                 return View(model);
             }
             return NotFound();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProductEdit(ProductDTO model)
+        public async Task<IActionResult> ProductEdit(ProductDto model)
         {
             if (ModelState.IsValid)
             {
-                //var accessToken = await HttpContext.GetTokenAsync("access_token");
-                var response = await _productService.UpdateProductAsync<ResponseDTO>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.UpdateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(ProductIndex));
@@ -77,25 +77,27 @@ namespace WebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> ProductDelete(int productId)
         {
-            //var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _productService.GetProductByIdAsync<ResponseDTO>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
             if (response != null && response.IsSuccess)
             {
-                ProductDTO model = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(response.Result));
+                ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
                 return View(model);
             }
             return NotFound();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProductDelete(ProductDTO model)
+        public async Task<IActionResult> ProductDelete(ProductDto model)
         {
             if (ModelState.IsValid)
             {
-                //var accessToken = await HttpContext.GetTokenAsync("access_token");
-                var response = await _productService.DeleteProductAsync<ResponseDTO>(model.ProductId);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId, accessToken);
                 if (response.IsSuccess)
                 {
                     return RedirectToAction(nameof(ProductIndex));

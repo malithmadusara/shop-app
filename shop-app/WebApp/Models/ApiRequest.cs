@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static WebApp.SD;
+using static Fresh.Web.SD;
 
-namespace WebApp.Models
+namespace Fresh.Web.Models
 {
     public class ApiRequest
     {
