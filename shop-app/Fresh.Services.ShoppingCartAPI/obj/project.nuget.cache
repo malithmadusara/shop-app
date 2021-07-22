@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "0zUDT6FRA/YWdCqZe77G0NhaIvjWwZThm73KRq67Pv/kk5aQAUz7qcFAe2EFwZweGlsAD4EuMj0tHEqJPshcPA==",
+  "success": true,
+  "projectFilePath": "G:\\Project\\shop-app\\shop-app\\Fresh.Services.ShoppingCartAPI\\Fresh.Services.ShoppingCartAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Malith\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Malith\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Malith\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Malith\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Malith\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Malith\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
